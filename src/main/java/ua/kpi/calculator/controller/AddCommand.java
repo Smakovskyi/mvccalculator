@@ -1,6 +1,7 @@
 package ua.kpi.calculator.controller;
 
 import javax.annotation.PostConstruct;
+import ua.kpi.calculator.controller.parser.ParserFactory;
 import ua.kpi.calculator.controller.parser.TwoArgumentParser;
 import ua.kpi.calculator.model.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class AddCommand implements Command {
     @Autowired
     private ApplicationContext context;
 
-    //private ParserFactory parserFactory = ParserFactory.getInstance();
+    private ParserFactory parserFactory = ParserFactory.getInstance();
 
 
     @Autowired
@@ -35,10 +36,10 @@ public class AddCommand implements Command {
 
     @Override
     public String execute(String arguments) {
-        TwoArgumentParser parser = context.getBean("parser" , TwoArgumentParser.class)
-            //parserFactory
-                //.twoArgumentParser(arguments)
-                .parse(arguments);
+        TwoArgumentParser parser = //context.getBean("parser" , TwoArgumentParser.class)
+            parserFactory
+                .twoArgumentParser(arguments);
+        parser.parse();
         if(parser.hasError() ){
             return parser.getErrorMessage();
         }

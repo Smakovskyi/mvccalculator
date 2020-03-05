@@ -19,24 +19,23 @@ import static org.mockito.Mockito.*;
 public class AddCommandTest {
 
     @Test
-    //@SneakyThrows
-    public void testExecute2And3() {
+    public void execute2Plus3Returns5() {
+        //mocking parser
         TwoArgumentParser parser = mock(TwoArgumentParser.class);
-        ParserFactory parserFactory = mock(ParserFactory.class);
-        when(parserFactory.twoArgumentParser(anyString())).thenReturn(parser);
-        CalculatorService calculatorService = mock(CalculatorService.class);
-        when(calculatorService.add(2, 3)).thenReturn(5L);
-
-
         when(parser.hasError()).thenReturn(false);
         when(parser.first() ).thenReturn(2);
         when(parser.second()).thenReturn(3);
         when(parser.parse()).thenReturn(parser);
+        //mocking parserFactory
+        ParserFactory parserFactory = mock(ParserFactory.class);
+        when(parserFactory.twoArgumentParser(anyString())).thenReturn(parser);
+        CalculatorService calculatorService = mock(CalculatorService.class);
+        when(calculatorService.add(2, 3)).thenReturn(5L);
+        //setting mocks as dependencies
         AddCommand addCommand = new AddCommand(calculatorService);
         ReflectionTestUtils.setField(addCommand , "parserFactory" , parserFactory);
+        final String expectedResult = "result = 5";
 
-
-        String expectedResult = "result = 5";
         String actualResult = addCommand.execute("2 3");
 
         verify(parser).parse();
