@@ -1,6 +1,6 @@
 package ua.kpi.calculator.controller;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 import ua.kpi.calculator.controller.parser.TwoArgumentParser;
 import ua.kpi.calculator.model.CalculatorService;
 
@@ -17,7 +17,7 @@ public class DivCommand implements Command{
     @Autowired
     private CommandFactory commandFactory;
 
-    @PostConstruct
+   // @PostConstruct
     void init(){
         commandFactory.registerCommand( "div" , this );
     }

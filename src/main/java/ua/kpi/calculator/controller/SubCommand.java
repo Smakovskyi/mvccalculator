@@ -1,6 +1,7 @@
 package ua.kpi.calculator.controller;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
+import ua.kpi.calculator.controller.parser.ParserFactory;
 import ua.kpi.calculator.controller.parser.TwoArgumentParser;
 import ua.kpi.calculator.model.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ public class SubCommand implements Command {
     @Autowired
     private CommandFactory commandFactory;
 
-    @PostConstruct
+    private ParserFactory parserFactory = ParserFactory.getInstance();
+
+   // @PostConstruct
     void init(){
         commandFactory.registerCommand( "sub" , this );
     }
 
     @Override
     public String execute(String command) {
-        TwoArgumentParser parser = new TwoArgumentParser(command).parse();
+        TwoArgumentParser parser = parserFactory.twoArgumentParser(command).parse();
         if(parser.hasError()) {
             return parser.getErrorMessage();
         }

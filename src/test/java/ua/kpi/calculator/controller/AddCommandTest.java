@@ -30,7 +30,7 @@ public class AddCommandTest {
         ParserFactory parserFactory = mock(ParserFactory.class);
         when(parserFactory.twoArgumentParser(anyString())).thenReturn(parser);
         CalculatorService calculatorService = mock(CalculatorService.class);
-        when(calculatorService.add(2, 3)).thenReturn(5L);
+        when(calculatorService.add(2, 3)).thenReturn(5);
         //setting mocks as dependencies
         AddCommand addCommand = new AddCommand(calculatorService);
         ReflectionTestUtils.setField(addCommand , "parserFactory" , parserFactory);
@@ -78,7 +78,7 @@ public class AddCommandTest {
 
         when(parserFactory.twoArgumentParser(anyString())).thenReturn(parser);
         CalculatorService calculatorService = mock(CalculatorService.class);
-        when(calculatorService.add(2, 3)).thenReturn(5L);
+        when(calculatorService.add(2, 3)).thenReturn(5);
 
 
         when(parser.hasError()).thenReturn(false);

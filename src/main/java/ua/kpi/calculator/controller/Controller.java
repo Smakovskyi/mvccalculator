@@ -12,8 +12,8 @@ public class Controller {
     private InputStream in;
     private View view;
 
-    @Autowired
-    CommandFactory commandFactory; // = CommandFactory.getInstance();
+    //@Autowired
+    CommandFactory commandFactory = CommandFactory.getInstance();
 
     public Controller(InputStream in, View view) {
         this.in = in;

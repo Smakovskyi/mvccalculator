@@ -1,9 +1,13 @@
 package ua.kpi.calculator.model.junit5;
 
 
+import org.junit.jupiter.api.Disabled;
 import ua.kpi.calculator.model.CalculatorService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import java.util.Optional;
 
@@ -16,15 +20,15 @@ public class CalculatorServiceTest {
 
     @Test
     @DisplayName("new test for add")
-    public void addTwoThreeAndFiveGetEight() {
-        final int first = 3;
-        final int second = 5;
-        final long expectedSum = 8L;
-        long actualSum;
+    public void addThreeAndFiveGetEight() {
+        var first = 3;
+        var second = 5;
+        final int expectedSum = 8;
 
-        actualSum = calculatorService.add(first,second);
+        var actualSum = calculatorService.add(first,second);
 
         assertEquals(expectedSum , actualSum);
+        assertThat( expectedSum, is( actualSum) );
     }
 
     @Test
@@ -58,15 +62,39 @@ public class CalculatorServiceTest {
         assertEquals(expectedResult,actualResult);
     }
 
+    @Disabled
     @Test
     @DisplayName ("direct test for dividing")
-
     void divideUsualExceptionally(){
         int first = 6;
         int second = 0;
 
         assertThrows( IllegalArgumentException.class, () ->calculatorService.divUsual(first,second));
 
+    }
+
+    @Test
+    @DisplayName("test for 2 x 2 multipling")
+    void multiply2x2get4(){
+        int first  = 2;
+        int second = 2;
+        final long expectedResult = 4;
+
+        long actual = calculatorService.mul(first, second);
+        assertThat(expectedResult, is(actual) );
+
+    }
+
+    @Test
+    @DisplayName ("direct test for multiplying")
+    void multiplyTwoWithThree(){
+        var first = 2;
+        var second = 3;
+        var expected = 6L;
+
+        var actualResult = calculatorService.mul(first, second);
+
+        assertThat(actualResult, is(expected));
     }
 
 

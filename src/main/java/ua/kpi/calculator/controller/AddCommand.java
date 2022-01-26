@@ -1,6 +1,6 @@
 package ua.kpi.calculator.controller;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 import ua.kpi.calculator.controller.parser.ParserFactory;
 import ua.kpi.calculator.controller.parser.TwoArgumentParser;
 import ua.kpi.calculator.model.CalculatorService;
@@ -29,7 +29,7 @@ public class AddCommand implements Command {
         this.calculatorService = calculatorService;
     }
 
-    @PostConstruct
+    //@PostConstruct
     void init(){
         commandFactory.registerCommand( "add" , this );
     }

@@ -5,17 +5,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    //private static CalculatorService instance = new CalculatorService();
-    //public static CalculatorService getInstance(){
-    //    return instance;
-    //}
+    private static CalculatorService instance = new CalculatorService();
+    public static CalculatorService getInstance(){
+        return instance;
+    }
 
-    public long add(int first, int second){
+    public int add(int first, int second){
         return first + second;
     }
 
     public long sub(int first, int second) {
         return first - second;
+    }
+
+    public long mul(int first, int second) {
+        return first * second;
     }
 
     public Optional<Integer> div(int first, int second){
